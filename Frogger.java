@@ -12,6 +12,8 @@ public class Frogger {
 		f.setup();
 		
 		ArrayList<Truck> list = new ArrayList<Truck>();
+		ArrayList<Log> list1 = new ArrayList <Log>();
+		
 		
 		int count = 0;
 		while (count < 50) {
@@ -22,13 +24,23 @@ public class Frogger {
 			count = count + 1;
 		}
 		
+		int count1 = 0;
+		while(count1 <50){
+				Log l = new Log();
+				l.setup();
+				list1.add(l);
+				
+				count1 = count1 + 1;
+				
+			}
+		
 		while (1 < 2) {
 			// draw stuff
 			drawBackground();
 			f.draw();
 			f.move();
 			// Tell every truck to draw and move.
-			for (Truck t : list) {
+			for (Truck t:list  ) {
 				t.draw();
 				t.move();
 				// If the truck is killing the frog.
@@ -36,10 +48,21 @@ public class Frogger {
 					f.setup();
 				}
 			}
+			for(Log l: list1){
+				l.draw();
+				l.move();
+				
+				if (l.isKilling(f)) {
+					l.setup();
+				}
+				
+			}
 			
 			Zen.buffer(33);
 		}
+
 	}
+		
 	
 	private static void drawBackground() {
 		Zen.setBackground("gray");
@@ -69,7 +92,20 @@ public class Frogger {
 				x = x + 20;
 			}
 			y = y + 50;
+			
+		}
+		Zen.setColor("gray");
+		y = 75;
+		while (y <150){
+			x=10;
+			while(x <800){
+				Zen.fillRect(x, y, 10, 3);
+				x = x+20;
+			}
+			y = y+50;
+			}
 		}
 	}
 
-}
+
+
